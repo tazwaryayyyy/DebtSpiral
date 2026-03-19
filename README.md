@@ -1,88 +1,74 @@
 # 🌀 Debt Spiral — Early Warning System
 
-An AI-powered web app that simulates your debt trajectory over 10 years, detects the exact point your debt becomes unrecoverable, and gives you personalized exit strategies via Claude AI.
+### *“Debt is a silent predator. Know its move before it strikes.”*
 
-Built for **Hackonomics** hackathon.
+**Debt Spiral** is a high-fidelity financial simulator designed to reveal the exact moment your debt becomes mathematically unrecoverable. We don't just show you numbers; we show you the **"Point of No Return"**—the precise flashpoint where your interest accrual outpaces your ability to recover without external help.
 
----
-
-## Tech Stack
-
-- **Backend:** Python 3.11+, FastAPI, Anthropic Claude API
-- **Frontend:** Vanilla JS, HTML/CSS, Chart.js
-- **AI:** Claude claude-sonnet-4-5 via Anthropic SDK
+Built with **FastAPI** and **Vanilla JS**, powered by **Groq AI**.
 
 ---
 
-## Setup & Run
+## ✨ Key Features
 
-### 1. Install dependencies
+- **🔴 Emergency Landing Mode**: An adaptive UI that shifts into high-alert (ambient red glow, pulsing borders) when your financial health enters the danger zone (DTI > 43%).
+- **🧠 AI Strategic Advisor**: A Groq-powered financial mentor that analyzes your specific debt structure and drafts a "Battle Plan" for recovery.
+- **⚡ Daily Bleed Meter**: A real-time tracker showing exactly how much money you’re losing to interest every single day, down to the cent.
+- **🛠️ What-If Simulator**: Interactive sliders allow you to test recovery scenarios (extra payments, expense cuts, rate refinancing) with instant Chart.js updates.
+- **📈 Hybrid Area Visualization**: Indigo (Safe) vs. Red (Danger) area charts with sharp "Insolvency Zone" shading to visualize your headroom against monthly income.
+
+---
+
+## 🚀 Getting Started
+
+### 1. Prepare the Environment
+Ensure you have Python 3.11+ installed. Clone this repository and install the dependencies:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 2. Set your Anthropic API key
+### 2. Configure Your Keys
+Create a `.env` file in the `backend/` directory (you can copy `.env.example`):
 
 ```bash
-# Windows (Git Bash / PowerShell)
-export ANTHROPIC_API_KEY=sk-ant-your-key-here
-
-# Windows CMD
-set ANTHROPIC_API_KEY=sk-ant-your-key-here
+GROQ_API_KEY=your_key_here
 ```
 
-### 3. Run the server
+### 3. Launch the System
+Start the FastAPI server using Uvicorn:
 
 ```bash
-cd backend
-uvicorn main:app --reload --port 8000
+# Navigate to the root folder
+uvicorn backend.main:app --reload
 ```
 
-### 4. Open in browser
-
-```
-http://localhost:8000
-```
+Then visit `http://localhost:8000` in your browser.
 
 ---
 
-## Project Structure
+## 🔬 How the Simulation Works
 
-```
-debt-spiral/
-├── backend/
-│   ├── main.py          # FastAPI app + routes
-│   ├── simulator.py     # Month-by-month debt projection math
-│   ├── ai_advisor.py    # Claude API integration
-│   └── models.py        # Pydantic input models
-├── frontend/
-│   ├── index.html       # UI structure
-│   ├── style.css        # Dark terminal aesthetic
-│   └── app.js           # Chart.js + API calls
-├── requirements.txt
-└── README.md
-```
+The system uses a month-by-month **Avalanche Method** simulation:
+1. **Interest Calculation**: Interest is applied to each debt individually at the start of every month.
+2. **Avalanche Allocation**: Your monthly surplus (Income - Expenses) is prioritized toward the debt with the **highest interest rate**.
+3. **Flashpoint Logic**: A "Spiral" is triggered if:
+   - Your **DTI (Debt-to-Income)** ratio exceeds the critical **43%** threshold.
+   - You experience **3 consecutive months** where minimum payments exceed available cash.
+   - Your total debt doubles within a 12-month window.
 
 ---
 
-## How It Works
+## 🛠️ Tech Stack
 
-1. User enters income, expenses, and all their debts
-2. FastAPI runs a month-by-month simulation (up to 20 years)
-3. Spiral threshold detected when:
-   - DTI ratio exceeds 43%, OR
-   - Minimum payments exceed available cash for 3+ consecutive months, OR
-   - Debt doubles within 12 months
-4. Claude API generates a personalized analysis with red flags + exit strategies
-5. Chart.js visualizes the debt trajectory with a danger zone marker
+- **Backend**: Python, FastAPI, Pydantic, Python-Dotenv
+- **AI Engine**: Groq (Llama-3.3-70b-versatile)
+- **Frontend**: Vanilla JS (ES6+), CSS Grid/Variables, Chart.js 4.x
+- **Visualization**: `chartjs-plugin-annotation` for real-time trajectory markers
 
 ---
 
-## Deployment (Render)
+## ⚖️ Disclaimer
+This tool is for educational and simulation purposes only. It is not a substitute for professional financial advice. Always consult with a certified financial planner or credit counselor regarding serious debt situations.
 
-1. Push to GitHub
-2. Create a new Web Service on [render.com](https://render.com)
-3. Set build command: `pip install -r requirements.txt`
-4. Set start command: `uvicorn backend.main:app --host 0.0.0.0 --port $PORT`
-5. Add env variable: `ANTHROPIC_API_KEY`
+---
+*Built for the **Hackonomics Hackathon** · High-performance financial literacy.*
