@@ -18,10 +18,17 @@ app.add_middleware(
 )
 
 # Serve frontend static files
-frontend_path = os.path.join(os.path.dirname(__file__), "..", "frontend")
+import os
+frontend_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "frontend")
 if os.path.exists(frontend_path):
     app.mount("/static", StaticFiles(directory=frontend_path), name="static")
 
+@app.get("/")
+async def root():
+    index_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "frontend", "index.html")
+    if os.path.exists(index_path):
+        return FileResponse(index_path)
+    return {"status": "running"}
 
 @app.get("/")
 async def root():
