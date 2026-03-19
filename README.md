@@ -38,8 +38,8 @@ GROQ_API_KEY=your_key_here
 Start the FastAPI server using Uvicorn:
 
 ```bash
-# Navigate to the root folder
-uvicorn backend.main:app --reload
+cd backend
+uvicorn main:app --reload --port 8000
 ```
 
 Then visit `http://localhost:8000` in your browser.
