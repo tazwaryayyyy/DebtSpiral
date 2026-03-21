@@ -71,4 +71,4 @@ The system uses a month-by-month **Avalanche Method** simulation:
 This tool is for educational and simulation purposes only. It is not a substitute for professional financial advice. Always consult with a certified financial planner or credit counselor regarding serious debt situations.
 
 ---
-*Built for the **Hackonomics Hackathon** · High-performance financial literacy.*
+Built by Tazwar Ahnaf Enan · Submitted to Hack Trek and Hyperbloom V2 Hackathon 2026.
